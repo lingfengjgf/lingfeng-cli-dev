@@ -1,0 +1,19 @@
+{
+  "name": "@lingfeng-cli-dev/core",
+  "version": "1.0.0",
+  "description": "lingfeng-cli-dev core",
+  "author": "lingfengjgf <lingfengjgf@163.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/core.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "node ./__tests__/core.test.js"
+  }
+}
