@@ -3,6 +3,10 @@
   "version": "1.0.1",
   "description": "lingfeng-cli dev",
   "main": "index.js",
+  "workspaces": [
+    "core/*",
+    "utils/*"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -5,7 +5,7 @@
   "author": "lingfengjgf <lingfengjgf@163.com>",
   "homepage": "",
   "license": "ISC",
-  "main": "lib/core.js",
+  "main": "lib/index.js",
   "bin": {
     "lf-cli-dev": "bin/index.js"
   },
@@ -22,5 +22,10 @@
   "gitHead": "1e1a5aec4cbdc4d0f8ca5fff81b9ba77d6310f7a",
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@lingfeng-cli-dev/utils": "^1.0.0",
+    "import-local": "^3.1.0",
+    "npmlog": "^7.0.1"
   }
 }
