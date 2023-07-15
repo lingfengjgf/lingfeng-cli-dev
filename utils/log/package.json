@@ -1,0 +1,32 @@
+{
+  "name": "@lingfeng-cli-dev/log",
+  "version": "1.0.3",
+  "description": "lingfeng-cli-dev log",
+  "keywords": [
+    "log"
+  ],
+  "author": "lingfengjgf <lingfengjgf@163.com>",
+  "homepage": "https://github.com/lingfengjgf/lingfeng-cli-dev#readme",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lingfengjgf/lingfeng-cli-dev.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/@lingfeng-cli-dev/log.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/lingfengjgf/lingfeng-cli-dev/issues"
+  }
+}

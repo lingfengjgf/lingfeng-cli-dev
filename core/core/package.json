@@ -24,8 +24,16 @@
     "access": "public"
   },
   "dependencies": {
+    "@lingfeng-cli-dev/log": "^1.0.0",
     "@lingfeng-cli-dev/utils": "^1.0.0",
+    "colors": "^1.4.0",
+    "dotenv": "^16.3.1",
     "import-local": "^3.1.0",
-    "npmlog": "^7.0.1"
+    "minimist": "^1.2.8",
+    "npmlog": "^7.0.1",
+    "path-exists": "^4.0.0",
+    "root-check": "^1.0.0",
+    "semver": "^7.5.4",
+    "user-home": "^3.0.0"
   }
 }
