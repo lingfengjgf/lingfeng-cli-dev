@@ -11,7 +11,7 @@ const log = require("@lingfeng-cli-dev/log");
 const constant = require("./const");
 
 let args, config;
-function core() {
+async function core() {
   try {
     checkPkgVersion();
     checkNodeVersion();
@@ -19,6 +19,7 @@ function core() {
     checkUserHome();
     checkInputArgs();
     checkEnv();
+    await ckeckGlobalUpdate();
   } catch (e) {
     log.error(e.message);
   }
@@ -69,7 +70,6 @@ function checkArgs() {
 function checkEnv() {
   const dotenv = require("dotenv");
   const dotenvPath = path.resolve(userHome, ".env");
-  console.log(userHome);
   if (pathExists(dotenvPath)) {
     config = dotenv.config({
       path: dotenvPath,
@@ -89,4 +89,20 @@ function createDefaultConfig() {
     cliConfig["cliHome"] = path.join(userHome, constant.DEFAULT_CLI_HOME);
   }
   process.env.CLI_HOME_PATH = cliConfig.cliHome;
+}
+
+async function ckeckGlobalUpdate() {
+  // 获取当前版本号和模块名
+  const currentVersion = pkg.version;
+  const npmName = pkg.name;
+  // 获取最新的版本号，提示用户更新到该版本
+  const { getNpmSemverVersion } = require("@lingfeng-cli-dev/get-npm-info");
+  const lastVersion = await getNpmSemverVersion(currentVersion, npmName);
+  if (lastVersion && semver.gt(lastVersion, currentVersion)) {
+    log.warn(
+      "更新提示",
+      colors.yellow(`请手动更新 ${npmName} ，当前版本: ${currentVersion}，最新版本：${lastVersion}
+更新命令：npm install -g ${npmName}`)
+    );
+  }
 }

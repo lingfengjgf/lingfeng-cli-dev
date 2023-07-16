@@ -26,6 +26,7 @@
   "dependencies": {
     "@lingfeng-cli-dev/log": "^1.0.0",
     "@lingfeng-cli-dev/utils": "^1.0.0",
+    "@lingfeng-cli-dev/get-npm-info": "file:../../utils/get-npm-info",
     "colors": "^1.4.0",
     "dotenv": "^16.3.1",
     "import-local": "^3.1.0",
