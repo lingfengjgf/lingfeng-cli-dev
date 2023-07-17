@@ -24,13 +24,15 @@
     "access": "public"
   },
   "dependencies": {
+    "@lingfeng-cli-dev/get-npm-info": "file:../../utils/get-npm-info",
+    "@lingfeng-cli-dev/init": "file:../../commands/init",
+    "@lingfeng-cli-dev/exec": "file:../exec",
     "@lingfeng-cli-dev/log": "^1.0.0",
     "@lingfeng-cli-dev/utils": "^1.0.0",
-    "@lingfeng-cli-dev/get-npm-info": "file:../../utils/get-npm-info",
     "colors": "^1.4.0",
+    "commander": "^11.0.0",
     "dotenv": "^16.3.1",
     "import-local": "^3.1.0",
-    "minimist": "^1.2.8",
     "npmlog": "^7.0.1",
     "path-exists": "^4.0.0",
     "root-check": "^1.0.0",

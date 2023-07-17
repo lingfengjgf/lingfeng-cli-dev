@@ -1,0 +1,38 @@
+{
+  "name": "@lingfeng-cli-dev/package",
+  "version": "1.0.0",
+  "description": "lingfeng-cli-dev npm modules",
+  "author": "lingfengjgf <lingfengjgf@163.com>",
+  "homepage": "https://github.com/lingfengjgf/lingfeng-cli-dev#readme",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lingfengjgf/lingfeng-cli-dev.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/@lingfeng-cli-dev/package.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/lingfengjgf/lingfeng-cli-dev/issues"
+  },
+  "dependencies": {
+    "@lingfeng-cli-dev/format-path": "file:../../utils/format-path",
+    "@lingfeng-cli-dev/get-npm-info": "file:../../utils/get-npm-info",
+    "@lingfeng-cli-dev/utils": "file:../../utils/utils",
+    "fs-extra": "^11.1.1",
+    "npminstall": "^7.9.0",
+    "path-exists": "^4.0.0",
+    "pkg-dir": "^5.0.0"
+  }
+}
