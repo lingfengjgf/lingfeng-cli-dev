@@ -24,9 +24,6 @@ async function exec() {
     targetPath = path.resolve(homePath, CACHE_DIR); // 生成缓存目录
     storeDir = path.resolve(targetPath, "node_modules/.store");
     // storeDir = path.resolve(targetPath, "node_modules");
-    log.verbose("targetPath", targetPath);
-    log.verbose("homePath", homePath);
-    log.verbose("storeDir", storeDir);
 
     pkg = new Package({
       targetPath,
@@ -48,9 +45,12 @@ async function exec() {
       packageVersion,
     });
   }
+  log.verbose("targetPath", targetPath);
+  log.verbose("homePath", homePath);
+  log.verbose("storeDir", storeDir);
   const rootFile = pkg.getRootFilePath();
   if (rootFile) {
-    require(rootFile).apply(null, arguments);
+    require(rootFile).call(null, Array.from(arguments));
   }
 }
 

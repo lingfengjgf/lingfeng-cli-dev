@@ -1,6 +1,9 @@
 "use strict";
+const Command = require("@lingfeng-cli-dev/command");
 
-function init(projectName, cmdObj) {
-  console.log("init", projectName, cmdObj.force, process.env.CLI_TARGET_PATH);
+class InitCommand extends Command {}
+function init(argv) {
+  return new InitCommand(argv);
 }
 module.exports = init;
+module.exports.InitCommand = InitCommand;

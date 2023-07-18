@@ -1,7 +1,10 @@
 {
-  "name": "@lingfeng-cli-dev/init",
+  "name": "@lingfeng-cli-dev/command",
   "version": "1.0.0",
-  "description": "lingfeng-cli-dev init",
+  "description": "lingfeng-cli-dev command",
+  "keywords": [
+    "command"
+  ],
   "author": "lingfengjgf <lingfengjgf@163.com>",
   "homepage": "https://github.com/lingfengjgf/lingfeng-cli-dev#readme",
   "license": "ISC",
@@ -21,12 +24,13 @@
     "url": "git+https://github.com/lingfengjgf/lingfeng-cli-dev.git"
   },
   "scripts": {
-    "test": "node ./__tests__/@lingfeng-cli-dev/init.test.js"
+    "test": "node ./__tests__/@lingfeng-cli-dev/command.test.js"
   },
   "bugs": {
     "url": "https://github.com/lingfengjgf/lingfeng-cli-dev/issues"
   },
   "dependencies": {
-    "@lingfeng-cli-dev/command": "file:../../models/command"
+    "colors": "^1.4.0",
+    "semver": "^7.5.4"
   }
 }

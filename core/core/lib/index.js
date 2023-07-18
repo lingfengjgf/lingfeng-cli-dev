@@ -10,7 +10,6 @@ const commander = require("commander");
 const pkg = require("../package.json");
 const log = require("@lingfeng-cli-dev/log");
 const constant = require("./const");
-const init = require("@lingfeng-cli-dev/init");
 const exec = require("@lingfeng-cli-dev/exec");
 
 const program = new commander.Command();
@@ -29,7 +28,6 @@ async function core() {
 // 脚手架启动
 async function prepare() {
   checkPkgVersion();
-  checkNodeVersion();
   checkRoot();
   checkUserHome();
   checkEnv();
@@ -38,18 +36,6 @@ async function prepare() {
 
 function checkPkgVersion() {
   log.notice("cli", pkg.version);
-}
-
-function checkNodeVersion() {
-  // 获取当前node版本号
-  const currentVersion = process.version;
-  // 比对最低版本号
-  const lowestVersion = constant.LOWEST_NODE_VERSION;
-  if (!semver.gte(currentVersion, lowestVersion)) {
-    throw new Error(
-      colors.red(`lingfeng-cli 需要安装 v${lowestVersion} 以上版本的 Node.js`)
-    );
-  }
 }
 
 function checkRoot() {
