@@ -1,7 +1,15 @@
 "use strict";
 const Command = require("@lingfeng-cli-dev/command");
+const log = require("@lingfeng-cli-dev/log");
 
-class InitCommand extends Command {}
+class InitCommand extends Command {
+  init() {
+    this.projectName = this._argv[0] || "";
+    this.force = !!this._argv[1].force;
+    log.verbose("projectName", this.projectName);
+    log.verbose("force", this.force);
+  }
+}
 function init(argv) {
   return new InitCommand(argv);
 }

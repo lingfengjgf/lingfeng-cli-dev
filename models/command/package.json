@@ -30,6 +30,7 @@
     "url": "https://github.com/lingfengjgf/lingfeng-cli-dev/issues"
   },
   "dependencies": {
+    "@lingfeng-cli-dev/log": "file:../../utils/log",
     "colors": "^1.4.0",
     "semver": "^7.5.4"
   }

@@ -27,6 +27,7 @@
     "url": "https://github.com/lingfengjgf/lingfeng-cli-dev/issues"
   },
   "dependencies": {
-    "@lingfeng-cli-dev/command": "file:../../models/command"
+    "@lingfeng-cli-dev/command": "file:../../models/command",
+    "@lingfeng-cli-dev/log": "file:../../utils/log"
   }
 }
