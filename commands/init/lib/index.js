@@ -6,6 +6,7 @@ const inquirer = require("inquirer");
 const semver = require("semver");
 const Command = require("@lingfeng-cli-dev/command");
 const log = require("@lingfeng-cli-dev/log");
+const getProjectTemplate = require("./getProjectTemplate");
 
 const TYPE_PROJECT = "project";
 const TYPE_COMPONENT = "component";
@@ -22,6 +23,7 @@ class InitCommand extends Command {
       // 准备阶段
       const projectInfo = await this.prepare();
       if (projectInfo) {
+        this.projectInfo = projectInfo;
         log.verbose("projectInfo", projectInfo);
         // 下载模板
         this.downloadTemplate();
@@ -31,8 +33,20 @@ class InitCommand extends Command {
       log.error(e.message);
     }
   }
-  downloadTemplate() {}
+  downloadTemplate() {
+    const { projectTemplate } = this.projectInfo;
+    const templateInfo = this.template.find(
+      (item) => item.url === projectTemplate
+    );
+    console.log(templateInfo);
+  }
   async prepare() {
+    // 判断项目模板是否存在
+    const template = await getProjectTemplate();
+    if (!template || !template.length) {
+      throw new Error("项目模板不存在！");
+    }
+    this.template = template;
     // 判断当前目录是否为空
     const localPath = process.cwd();
     if (!this.isCwdEmpty(localPath)) {
@@ -142,12 +156,24 @@ class InitCommand extends Command {
             }
           },
         },
+        {
+          type: "list",
+          name: "projectTemplate",
+          message: "请选择项目模板",
+          choices: this.createTemplateChoices(),
+        },
       ]);
       projectInfo = { type, ...project };
     } else if (type === TYPE_COMPONENT) {
     }
 
     return projectInfo;
+  }
+  createTemplateChoices() {
+    return this.template.map((item) => ({
+      name: item.name,
+      value: item.url,
+    }));
   }
   isCwdEmpty(localPath) {
     // 获取当前目录下包含的文件

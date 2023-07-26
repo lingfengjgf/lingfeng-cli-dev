@@ -1,7 +1,7 @@
 {
-  "name": "@lingfeng-cli-dev/init",
+  "name": "@lingfeng-cli-dev/request",
   "version": "1.0.0",
-  "description": "lingfeng-cli-dev init",
+  "description": "lingfeng-cli-dev request",
   "author": "lingfengjgf <lingfengjgf@163.com>",
   "homepage": "https://github.com/lingfengjgf/lingfeng-cli-dev#readme",
   "license": "ISC",
@@ -21,17 +21,12 @@
     "url": "git+https://github.com/lingfengjgf/lingfeng-cli-dev.git"
   },
   "scripts": {
-    "test": "node ./__tests__/@lingfeng-cli-dev/init.test.js"
+    "test": "node ./__tests__/@lingfeng-cli-dev/request.test.js"
   },
   "bugs": {
     "url": "https://github.com/lingfengjgf/lingfeng-cli-dev/issues"
   },
   "dependencies": {
-    "@lingfeng-cli-dev/command": "file:../../models/command",
-    "@lingfeng-cli-dev/log": "file:../../utils/log",
-    "@lingfeng-cli-dev/request": "file:../../utils/request",
-    "fs-extra": "^11.1.1",
-    "inquirer": "^8.0.0",
-    "semver": "^7.5.4"
+    "axios": "^1.4.0"
   }
 }
