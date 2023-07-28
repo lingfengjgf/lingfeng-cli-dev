@@ -4,8 +4,10 @@ const fs = require("fs");
 const fse = require("fs-extra");
 const inquirer = require("inquirer");
 const semver = require("semver");
+const userHome = require("user-home");
 const Command = require("@lingfeng-cli-dev/command");
 const log = require("@lingfeng-cli-dev/log");
+const Package = require("@lingfeng-cli-dev/package");
 const getProjectTemplate = require("./getProjectTemplate");
 
 const TYPE_PROJECT = "project";
@@ -26,19 +28,41 @@ class InitCommand extends Command {
         this.projectInfo = projectInfo;
         log.verbose("projectInfo", projectInfo);
         // 下载模板
-        this.downloadTemplate();
+        await this.downloadTemplate();
         // 安装模板
       }
     } catch (e) {
       log.error(e.message);
     }
   }
-  downloadTemplate() {
+  async downloadTemplate() {
     const { projectTemplate } = this.projectInfo;
     const templateInfo = this.template.find(
       (item) => item.url === projectTemplate
     );
-    console.log(templateInfo);
+    const targetPath = path.resolve(
+      process.cwd(),
+      "lingfeng-cli-dev",
+      "template"
+    );
+    const storeDir = path.resolve(
+      userHome,
+      "lingfeng-cli-dev",
+      "template",
+      "node_modules"
+    );
+    const { npmName, version } = templateInfo;
+    const templateNpm = new Package({
+      targetPath,
+      storeDir,
+      packageName: npmName,
+      packageVersion: version,
+    });
+    if (!(await templateNpm.exists())) {
+      await templateNpm.install();
+    } else {
+      await templateNpm.update();
+    }
   }
   async prepare() {
     // 判断项目模板是否存在

@@ -29,9 +29,11 @@
   "dependencies": {
     "@lingfeng-cli-dev/command": "file:../../models/command",
     "@lingfeng-cli-dev/log": "file:../../utils/log",
+    "@lingfeng-cli-dev/package": "file:../../models/package",
     "@lingfeng-cli-dev/request": "file:../../utils/request",
     "fs-extra": "^11.1.1",
     "inquirer": "^8.0.0",
-    "semver": "^7.5.4"
+    "semver": "^7.5.4",
+    "user-home": "^3.0.0"
   }
 }
