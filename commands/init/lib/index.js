@@ -9,6 +9,7 @@ const Command = require("@lingfeng-cli-dev/command");
 const log = require("@lingfeng-cli-dev/log");
 const Package = require("@lingfeng-cli-dev/package");
 const getProjectTemplate = require("./getProjectTemplate");
+const { spinnerStart } = require("@lingfeng-cli-dev/utils");
 
 const TYPE_PROJECT = "project";
 const TYPE_COMPONENT = "component";
@@ -59,9 +60,25 @@ class InitCommand extends Command {
       packageVersion: version,
     });
     if (!(await templateNpm.exists())) {
-      await templateNpm.install();
+      const spinner = spinnerStart("正在下载模板...");
+      try {
+        await templateNpm.install();
+        log.success("下载模板成功");
+      } catch (error) {
+        throw error;
+      } finally {
+        spinner.stop();
+      }
     } else {
-      await templateNpm.update();
+      const spinner = spinnerStart("正在更新模板...");
+      try {
+        await templateNpm.update();
+        log.success("更新模板成功");
+      } catch (error) {
+        throw error;
+      } finally {
+        spinner.stop();
+      }
     }
   }
   async prepare() {

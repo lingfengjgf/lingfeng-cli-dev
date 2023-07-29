@@ -31,6 +31,7 @@
     "@lingfeng-cli-dev/log": "file:../../utils/log",
     "@lingfeng-cli-dev/package": "file:../../models/package",
     "@lingfeng-cli-dev/request": "file:../../utils/request",
+    "@lingfeng-cli-dev/utils": "file:../../utils/utils",
     "fs-extra": "^11.1.1",
     "inquirer": "^8.0.0",
     "semver": "^7.5.4",
