@@ -4,6 +4,7 @@ const path = require("path");
 const cp = require("child_process");
 const Package = require("@lingfeng-cli-dev/package");
 const log = require("@lingfeng-cli-dev/log");
+const { exec: spawn } = require("@lingfeng-cli-dev/utils");
 
 const SETTINGS = {
   init: "@lingfeng-cli-dev/core",
@@ -89,14 +90,6 @@ async function exec() {
       log.error(error.message);
     }
   }
-}
-
-// 兼容Windows 这里不做处理Windows中也可以正常执行
-function spawn(command, args, options) {
-  const win32 = process.platform === "win32";
-  const cmd = win32 ? "cmd" : command;
-  const cmdArgs = win32 ? ["/c"].concat(command, args) : args;
-  return cp.spawn(cmd, cmdArgs, options || {});
 }
 
 module.exports = exec;

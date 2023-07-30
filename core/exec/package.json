@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@lingfeng-cli-dev/package": "file:../../models/package",
+    "@lingfeng-cli-dev/utils": "file:../../utils/utils",
     "@lingfeng-cli-dev/log": "file:../../utils/log"
   }
 }
