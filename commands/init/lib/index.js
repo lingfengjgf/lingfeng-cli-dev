@@ -5,6 +5,8 @@ const fse = require("fs-extra");
 const inquirer = require("inquirer");
 const semver = require("semver");
 const userHome = require("user-home");
+const ejs = require("ejs");
+const { globSync } = require("glob");
 const Command = require("@lingfeng-cli-dev/command");
 const log = require("@lingfeng-cli-dev/log");
 const Package = require("@lingfeng-cli-dev/package");
@@ -76,6 +78,34 @@ class InitCommand extends Command {
       throw new Error(errMsg);
     }
   }
+  ejsRender(ignore) {
+    try {
+      const dir = process.cwd();
+      const projectInfo = this.projectInfo;
+      const files = globSync("**", {
+        cwd: dir,
+        nodir: true,
+        ignore,
+      });
+      Promise.all(
+        files.map((file) => {
+          const filePath = path.join(dir, file);
+          return new Promise((resolve, reject) => {
+            ejs.renderFile(filePath, projectInfo, {}, (err, res) => {
+              if (err) {
+                reject(err);
+              } else {
+                fse.writeFileSync(filePath, res);
+                resolve(res);
+              }
+            });
+          });
+        })
+      );
+    } catch (e) {
+      throw e;
+    }
+  }
   async installNormalTemplate() {
     log.verbose("安装标准模板");
     // 复制代码到当前目录
@@ -91,13 +121,16 @@ class InitCommand extends Command {
         },
       });
       await sleep();
-      fse.removeSync(templatePath);
+      await fse.removeSync(templatePath);
     } catch (e) {
       throw e;
     } finally {
       spinner.stop();
       log.success("安装模板成功");
     }
+    const templateIgnore = this.templateInfo.ignore || [];
+    const ignore = ["**/node_modules/**", ...templateIgnore];
+    await this.ejsRender(ignore);
     // 安装依赖
     const { installCommand, startCommand } = this.templateInfo;
     if (installCommand) {
@@ -175,7 +208,6 @@ class InitCommand extends Command {
       stdio: "inherit",
       cwd: targetPath,
     });
-    console.log("downloadRes:", downloadRes);
     if (downloadRes !== 0) {
       throw new Error("项目模板下载失败");
     }
@@ -314,6 +346,15 @@ class InitCommand extends Command {
     } else if (type === TYPE_COMPONENT) {
     }
 
+    // 生成className
+    if (projectInfo.projectName) {
+      projectInfo.className = require("kebab-case")(
+        projectInfo.projectName
+      ).replace(/^-/, "");
+    }
+    if (projectInfo.projectVersion) {
+      projectInfo.version = projectInfo.projectVersion;
+    }
     return projectInfo;
   }
   createTemplateChoices() {
